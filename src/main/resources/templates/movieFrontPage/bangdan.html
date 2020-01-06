@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/reset.css" th:href="@{/maoyan/css/reset.css}"/>
+    <link rel="stylesheet" href="../css/nav.css" th:href="@{/maoyan/css/nav.css}"/>
+    <link rel="stylesheet" href="../css/bangdan.css" th:href="@{/maoyan/css/bangdan.css}"/>
+    <title>电影榜单</title>
+</head>
+<body>
+
+<!--内容-->
+<header style="background-color:#7760d4;">
+    <div class="header-inner" >
+        <a href="/movie/index"  class="h-logo" th:style="|background: url('/movie-master/images/logoko.png') no-repeat; background-size: cover;|"></a>
+    </div>
+</header>
+<section>
+    <div class="section-header" style="margin-top: 100px;">
+        <p style="color: #FF00FF" th:text="|${#dates.format(#dates.createToday(),'yyyy-MM-dd')}  已更新|">2016-10-21 <span>已更新</span></p>
+    </div>
+    <div class="section-header">
+        <p>榜单规则：将昨日国内热映的影片，按照评分从高到底排列取前10名，每天上午10点更新。相关数据来源于“猫眼专业版”及“猫眼电影库”。</p>
+    </div>
+    <div class="section-moivepic" th:each="li,S:${list}">
+        <ul>
+            <li class="paiming1" style="background-color: #f8df70"><p><i style="color: white" th:text="${S.count}">4</i></p></li>
+            <li class="pic-style"><a href=""><img src="../img/36763805c544e93160d0df74b612f5e9622163.jpg" style="width: 100px;height: 150px" th:src="@{|/movie-master/images/tupian/${li.movieImg}|}" alt=""/></a></li>
+        </ul>
+        <div class="section-txt">
+            <div>
+            <h1><a href="" th:href="@{|/movie/xiangqing?id=${li.movieId}|}" th:text="${li.movieName}">声之形</a></h1>
+
+            <p th:text="${li.movieOutline}">主演：安迪,凯蒂,葛兰模,凯尔西</p>
+
+            <p th:data="${li.premieredate}">上映时间：2016-09-23</p>
+            </div>
+            <div>
+                <p>
+                    <span class="pingfen" th:text="${li.movieScore}"></span>
+                    <span th:if="${li.movieScore} eq null" class="pingfen" th:text="暂无"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--底部footer-->
+<footer>
+    <p>&copy2016 猫眼电影 maoyan.com 京ICP证160733号 京ICP备 16022489号-1 京公安网安备 11010502030881号 网络文化经营许可证 电子公告服务规则</p>
+
+    <p>北京猫眼文化传媒有限公司</p>
+</footer>
+</body>
+</html>

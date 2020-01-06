@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>电影</title>
+    <link rel="stylesheet" href="../css/reset.css" th:href="@{/maoyan/css/reset.css}"/>
+    <link rel="stylesheet" href="../css/nav.css" th:href="@{/maoyan/css/nav.css}"/>
+    <link rel="stylesheet" href="../css/dianyin.css" th:href="@{/maoyan/css/dianyin.css}"/>
+</head>
+<body>
+<!--导航-->
+<header style="background-color:#7760d4;">
+    <div class="header-inner" >
+        <a href="/movie/index"  class="h-logo" th:style="|background: url('/movie-master/images/logoko.png') no-repeat; background-size: cover;|"></a>
+    </div>
+</header>
+<!--标题-->
+<!--内容导航-->
+    <section>
+        <div class="section-1" style="margin-top: 100px">
+            <div>
+                <p>类型：</p>
+                <ul class="txt">
+                    <li th:each="item,S:${categoryList}">
+                        <a href=""  th:href="@{|/movie/classification?id=${item.cateporyId}|}" th:unless="${item.cateporyId == cid}" th:text="${item.cateporyName}">全部</a>
+                        <a href="" th:href="@{|/movie/classification?id=${item.cateporyId}|}" th:if="${item.cateporyId == cid}" th:style="|color: white;background: #f34e42;border-radius: 45%;padding: 5px;|"  th:text="${item.cateporyName}">全部</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section-3">
+            <ul th:unless="${movies == null}">
+                <li th:each="li,S:${movies}">
+                    <a href="" th:href="@{|/movie/xiangqing?id=${li.movieId}|}"><img style="width: 100px;height: 150px" src="../img/8ff9675ab73cdc31a9714a918a9a83d7223841.png" th:src="@{|/movie-master/images/tupian/${li.movieImg}|}" /></a>
+                    <a href="" th:href="@{|/movie/xiangqing?id=${li.movieId}|}">
+                        <p th:text="${li.movieName}">英伦对决</p>
+
+                        <p th:text="${li.movieScore}"><i></i><span><i></i></span></p>
+                    </a>
+                </li>
+            </ul>
+            <h1 th:if="${movies == null}">
+                暂无
+            </h1>
+        </div>
+    </section>
+
+<footer>
+    <p>&copy2016 猫眼电影 maoyan.com 京ICP证160733号 京ICP备 16022489号-1 京公安网安备 11010502030881号 网络文化经营许可证 电子公告服务规则</p>
+
+    <p>北京猫眼文化传媒有限公司</p>
+</footer>
+</body>
+</html>

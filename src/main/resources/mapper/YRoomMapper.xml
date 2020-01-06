@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.YRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.YRoom" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="room_name" property="roomName" jdbcType="INTEGER" />
+    <result column="hotel_id" property="hotelId" jdbcType="INTEGER" />
+    <result column="roomgrade_id" property="roomgradeId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="vip_price" property="vipPrice" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="roomType_id" property="roomtypeId" jdbcType="INTEGER" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="bedType_id" property="bedtypeId" jdbcType="INTEGER" />
+    <result column="room_image" property="roomImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    room_id, room_name, hotel_id, roomgrade_id, price, vip_price, status, roomType_id, 
+    details, bedType_id, room_image
+  </sql>
+</mapper>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script  type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
+<html>
+
+<head>
+    <title>购物车</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+
+</head>
+
+<body>
+<nav class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="background: pink;">请确认生成的订单</a>
+        </div>
+
+    </div>
+</nav>
+<style>
+    td{
+        float:left;
+        text-align: center;
+
+    }
+</style>
+<form method="post" th:action="@{/alipay/createOrder.action}">
+    <input type="hidden" id="productId" name="id"  th:value="${p.id}"/>
+
+    <table class="table" th:each="p:${p}">
+        <tr>
+            <td>订单编号：</td><td th:text="${p.id}"></td>
+        </tr>
+        <tr>
+            <td>订单名称：</td>
+            <td th:text="${p.name}">产品名称: ${p.name }</td>
+        </tr>
+        <tr>
+            <td>订单价格：</td>
+            <td th:text="${p.price}">产品价格: ${p.price }</td>
+        </tr>
+        <td>
+            <input id="buyCounts" name="buyCounts" type="hidden" th:value="1"/>
+        </td>
+        </tr>
+        </tr>
+        <td>
+            <input class="btn btn-warning" id="shijian" type="button" value="提交，生成订单" onclick="createOrder()"/>
+        </td>
+        </tr>
+    </table>
+
+</form>
+
+
+<input type="hidden" id="hdnContextPath" name="hdnContextPath" value="http://localhost:9091/"/>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+
+    var hdnContextPath = $("#hdnContextPath").val();
+    function createOrder() {
+        $.ajax({
+            url: hdnContextPath + "/createOrder",
+            type: "POST",
+            data: {
+                "productId": $("#productId").val(),
+                "buyCounts": $("#buyCounts").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 200 && data.msg == "OK") {
+//                    debugger;
+                    // 提交订单成功后, 进入购买页面
+                    window.location.href = hdnContextPath + "goPay/" + data.data;
+                } else {
+                    alert(data.msg);
+                    console.log(JSON.stringify(data));
+                }
+            }
+        });
+    }
+    window.onload = createOrder;
+
+</script>
+

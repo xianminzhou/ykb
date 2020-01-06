@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.HallMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.Hall" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="hall_id" property="hallId" jdbcType="INTEGER" />
+    <result column="hall_name" property="hallName" jdbcType="VARCHAR" />
+    <result column="seat_num" property="seatNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    hall_id, hall_name, seat_num
+  </sql>
+</mapper>

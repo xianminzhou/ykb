@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.MovieFrontMapper" >
+    <resultMap id="BaseResultMaps" type="com.seecen.dd.xxxsys.dao.domain.Movie" >
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="movie_id" property="movieId" jdbcType="INTEGER" />
+        <result column="movie_name" property="movieName" jdbcType="VARCHAR" />
+        <result column="movie_outline" property="movieOutline" jdbcType="VARCHAR" />
+        <result column="premiereDate" property="premieredate" jdbcType="DATE" />
+        <result column="toStar" property="tostar" jdbcType="VARCHAR" />
+        <result column="language" property="language" jdbcType="VARCHAR" />
+        <result column="movie_score" property="movieScore" jdbcType="DOUBLE" />
+        <result column="boxOffice" property="boxoffice" jdbcType="DOUBLE" />
+        <result column="movie_img" property="movieImg" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="selectFive"  resultMap="BaseResultMaps">
+      SELECT * FROM y_movie ORDER BY boxOffice  DESC LIMIT 0,6
+    </select>
+    <select id="selectpaixu" resultMap="BaseResultMaps">
+      SELECT * FROM y_movie ORDER BY movie_score  DESC
+    </select>
+</mapper>

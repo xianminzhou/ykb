@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.ZRoomMapper" >
+    <resultMap id="MyMap" type="com.seecen.dd.xxxsys.dao.domain.ZRoom" >
+        <id column="room_id" property="roomId" jdbcType="INTEGER" />
+        <result column="room_name" property="roomName" jdbcType="INTEGER" />
+        <result column="hotel_id" property="hotelId" jdbcType="INTEGER" />
+        <result column="roomgrade_id" property="roomgradeId" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="vip_price" property="vipPrice" jdbcType="DECIMAL" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="roomType_id" property="roomtypeId" jdbcType="INTEGER" />
+        <result column="details" property="details" jdbcType="VARCHAR" />
+        <result column="bedType_id" property="bedtypeId" jdbcType="INTEGER" />
+        <result column="room_image" property="roomImage" jdbcType="VARCHAR" />
+        <association property="yHotel" javaType="com.seecen.dd.xxxsys.dao.domain.YHotel">
+            <id column="hotel_id" property="hotelId" jdbcType="INTEGER"></id>
+            <result column="hotel_name" property="hotelName" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="yRoomGrade" javaType="com.seecen.dd.xxxsys.dao.domain.YRoomGrade">
+            <id column="roomgrade_id" property="roomgradeId" jdbcType="INTEGER"></id>
+            <result column="roomgrade_name" property="roomgradeName" jdbcType="VARCHAR"></result>
+        </association>
+        <association property="yRoomType" javaType="com.seecen.dd.xxxsys.dao.domain.YRoomType">
+            <id column="roomType_id" property="roomtypeId" jdbcType="INTEGER"></id>
+            <result column="roomType_name" property="roomtypeName" jdbcType="VARCHAR"></result>
+            <result column="roomType_residue" property="roomtypeResidue" jdbcType="INTEGER"></result>
+        </association>
+        <association property="yBedType" javaType="com.seecen.dd.xxxsys.dao.domain.YBedType">
+            <id column="bedType_id" property="bedtypeId" jdbcType="INTEGER"></id>
+            <result column="bedType_name" property="bedtypeName" jdbcType="VARCHAR"></result>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="MyMap">
+        select
+             A.room_id,
+             A.room_name,
+             B.hotel_name,
+             A.price,
+             A.vip_price,
+             A.status,
+             D.roomType_name,
+             D.roomType_residue,
+             A.details,
+             E.bedType_name,
+             A.room_image
+        from
+             y_hotel_room A,
+             y_hotel B,
+             y_hotel_roomtype D,
+             y_hotel_bedtype E
+        <where>
+             A.hotel_id=B.hotel_id and
+             A.roomType_id=D.roomType_id and
+             A.bedType_id=E.bedType_id
+             <if test="roomId != null">
+                and A.room_id = #{roomId}
+             </if>
+            <if test="roomName != null">
+                and A.room_name like #{roomName}
+            </if>
+            <if test="price != null">
+                and A.price >= #{price}
+            </if>
+            <if test="yHotel != null and yHotel.hotelName != null and yHotel.hotelName != ''">
+                and B.hotel_name like #{yHotel.hotelName}
+            </if>
+            <if test="yRoomType != null and yRoomType.roomtypeName != null and yRoomType.roomtypeName != ''">
+                and D.roomType_name like #{yRoomType.roomtypeName}
+            </if>
+            <if test="yBedType != null and yBedType.bedtypeName != null and yBedType.bedtypeName != ''">
+                and E.bedType_name like #{yBedType.bedtypeName}
+            </if>
+        </where>
+        order by A.room_id desc
+  </select>
+  <!--<insert id="roomAdd" parameterType="com.seecen.dd.xxxsys.dao.domain.ZRoom">
+      insert into y_hotel_room
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+            room_id,
+          <if test="roomName != null">
+            room_name,
+          </if>
+          <if test="hotelId != null">
+            hotel_id,
+          </if>
+          <if test="price != null">
+            price,
+          </if>
+          <if test="vipPrice != null">
+            vip_price,
+          </if>
+          <if test="status != null">
+            status,
+          </if>
+          <if test="roomtypeId != null">
+            roomType_id,
+          </if>
+          <if test="details != null">
+            details,
+          </if>
+          <if test="bedtypeId != null">
+            bedType_id,
+          </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{roomId},
+          <if test="roomName != null">
+            #{roomName},
+          </if>
+          <if test="hotelId != null">
+            #{hotelId},
+          </if>
+          <if test="price != null">
+            #{price},
+          </if>
+          <if test="vipPrice != null">
+            #{vipPrice},
+          </if>
+          <if test="status != null">
+            #{status},
+          </if>
+          <if test="roomtypeId != null">
+            #{roomtypeId},
+          </if>
+          <if test="details != null">
+            #{details},
+          </if>
+          <if test="bedtypeId != null">
+            #{bedtypeId},
+          </if>
+      </trim>
+  </insert>-->
+</mapper>

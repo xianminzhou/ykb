@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.SeatMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.Seat" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="seat_id" property="seatId" jdbcType="INTEGER" />
+    <result column="seat_name" property="seatName" jdbcType="VARCHAR" />
+    <result column="hall_id" property="hallId" jdbcType="INTEGER" />
+    <result column="seat_state" property="seatState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    seat_id, seat_name, hall_id, seat_state
+  </sql>
+</mapper>

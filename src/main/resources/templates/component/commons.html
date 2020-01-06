@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="page" th:fragment="page">
+    <script>
+        function go(num) {
+            var pn = document.getElementsByName("pageNum")[0];
+            pn.value = num;
+            var f = document.getElementsByTagName("form")[0];
+            f.submit();
+        }
+    </script>
+    <style>
+        .arr{
+            cursor: not-allowed;
+            color: #AAAAAA;
+        }
+    </style>
+    <div>
+        <a class="prev" href=""
+           th:href="@{|javascript:go(1)|}"
+           th:utext="${pageInfo.pageNum==1?'<span class=arr>'+'首页'+'</span>':'首页'}"
+           th:remove="${pageInfo.pageNum==1?'tag':'none'}">首页
+        </a>
+        <a class="prev" href=""
+           th:href="@{|javascript:go(${pageInfo.prePage})|}"
+           th:utext="${pageInfo.pageNum==1?'<span class=arr>'+'上页'+'</span>':'上页'}"
+           th:remove="${pageInfo.pageNum==1?'tag':'none'}">上一页
+        </a>
+        <a class="num" href=""
+           th:href="@{|javascript:go(${n})|}"
+           th:each="n:${pageInfo.navigatepageNums}"
+           th:utext="${pageInfo.pageNum==n?'<span class=current>'+n+'</span>':n}"
+           th:remove="${pageInfo.pageNum==n?'tag':'none'}">1
+        </a>
+        <a class="next"
+           th:href="@{|javascript:go(${pageInfo.nextPage})|}"
+           th:utext="${pageInfo.pageNum==pageInfo.pages?'<span class=arr>'+'下页'+'</span>':'下页'}"
+           th:remove="${pageInfo.pageNum==pageInfo.pages?'tag':'none'}">下一页
+        </a>
+        <a class="next"
+           th:href="@{|javascript:go(${pageInfo.pages})|}"
+           th:utext="${pageInfo.pageNum==pageInfo.pages?'<span class=arr>'+'尾页'+'</span>':'尾页'}"
+           th:remove="${pageInfo.pageNum==pageInfo.pages?'tag':'none'}">尾页
+        </a>
+    </div>
+</div>

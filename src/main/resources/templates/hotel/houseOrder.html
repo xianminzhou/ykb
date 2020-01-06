@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="/jquery-3.4.1.min.js" language="JavaScript"  type="text/javascript"></script>
+<meta charset="UTF-8">
+<title>鱼扑</title>
+    <style>
+        body{
+            background:url("/hotel_jpg/big_image_1.jpg");
+            background-size: 100% 100%;
+            background-size: cover;
+            margin: 0;
+        }
+        #banner{
+            width: 100%;
+            height: 100px;
+            /*opacity: 0.4;*/
+            background: #886231;
+        }
+        #bannerCenter{
+            width: 500px;
+            height: 50px;
+            position: relative;
+            left:4%;
+            font-size: 35px;
+            top: 30px;
+            float: left;
+        }
+        #bannerRight{
+            width: 200px;
+            height: 50px;
+            float: right;
+            position: relative;
+            right: 50px;
+            top: 30px;
+        }
+        .bannerText{
+            color: white;
+            font-family: 幼圆;
+            width: 100px;
+            height: 20px;
+            text-decoration: none;
+        }
+        #postWindow{
+            width: 1000px;
+            height: 230px;
+            position: relative;
+            transform: translateX(-50%);
+            left: 30%;
+            background: white ;
+            border-radius: 5px ;
+            box-shadow: 0 0 0.8em rgba(0,0,0,0.8);
+            margin-top: 20px;
+        }
+        .postTop{
+            width: 100%;
+            height: 32px;
+            background: #F5F5F5;
+        }
+        .staytime,.checkouttime,.orderNumber{
+            position: relative;
+            left: 50px;
+            top: 5px;
+            color: #AAAAAA;
+        }
+        .postPage{
+            width: 900px;
+            height: 160px;
+
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            margin-top: 10px;
+
+        }
+        #textarea{
+            width: 400px;
+            height: 150px;
+            border: 1px solid #E5E5E5;
+            position: relative;
+            float: left;
+            color: black;
+        }
+        .rightText{
+            width: 100px;
+            height: 150px;
+            border-top: 1px solid #E5E5E5;
+            border-bottom: 1px solid #E5E5E5;
+            border-right: 1px solid #E5E5E5;
+            float: left;
+            line-height: 150px;
+            text-align: center;
+        }
+        .see{
+            width: 80px;
+            height: 30px;
+            background: #2983bb;
+            color: black;
+            box-shadow: 0 0 0.2em rgba(197,0,0,0.8);
+            display: block;
+            text-decoration: none;
+            margin: 60px auto;
+        }
+        .see:hover{
+            background: #886231;
+            box-shadow: 0 0 0.8em rgba(0,0,0,0.8);
+            border-radius: 5px;
+        }
+        .pay{
+            width: 80px;
+            height: 30px;
+            background: #886231;
+            color: black;
+            box-shadow: 0 0 0.2em rgba(197,0,0,0.8);
+            display: block;
+            text-decoration: none;
+            margin: 60px auto;
+        }
+        .pay:hover{
+            background: #2983bb;
+            border-radius: 5px;
+        }
+        h3{
+            text-indent: 20px;
+            height: 30px
+        }
+
+        .pic{
+            width: 200px;
+            height: 140px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            position: relative;
+            left: 20px;
+            border-radius: 5px;
+            background-size: 100% 100%;
+            background-size: cover;
+            float: left;
+            background-image: url("/hotel_jpg/property_2.jpg");
+        }
+        .postText{
+            width: 500px;
+            height: 120px;
+            float: right;
+            letter-spacing: 3px;
+            line-height: 25px;
+            position: absolute;
+            left: 250px;
+            top: 40px;
+        }
+    </style>
+</body>
+    <div id="banner">
+        <div id="bannerCenter">
+            <a class="bannerText" href="#">全部订单👍</a>
+        </div>
+        <div id="bannerRight" style="text-align: center;line-height: 50px">
+            <a class="bannerText" href="/room/list" style="font-size: 25px" >返回酒店🏨</a>
+        </div>
+    </div>
+    <div id="postWindow" th:each="item : ${list}">
+        <div class="postTop">
+            <strong class="staytime">预定时间：<span th:text="${#dates.format(item.staytime,'yyyy-MM-dd HH:mm:ss')}">2019-09-06</span></strong>
+            <strong class="checkouttime">退房时间：<span th:text="${#dates.format(item.checkouttime,'yyyy-MM-dd HH:mm:ss')}">2019-09-06</span></strong>
+            <strong class="orderNumber" style="left: 200px;">账单编号：<span th:text="${item.orderNumber}">100000</span></strong>
+        </div>
+        <div class="postPage">
+            <div id="textarea">
+                <div class="pic"></div>
+                <div class="postText">
+                    <strong th:text="${item.yRoomType.roomtypeName}">豪华江景客房</strong>
+                    <br>
+                    <strong>房号:<span th:text="${item.yRoom.roomName}">123</span></strong>
+                </div>
+            </div>
+            <div class="rightText" th:text="${item.yuser.userName}">
+                先民队长
+            </div>
+            <div class="rightText" style="width: 150px">
+                费用：<span th:text="${item.endprice}">999.0</span>
+            </div>
+            <div class="rightText">
+                <span th:if="${item.status==0}">未付款</span>
+                <span th:if="${item.status==1}">已完成</span>
+            </div>
+            <div class="rightText"style="width: 130px">
+                <a class="see" th:if="${item.status==1}">
+                    <span style="position:relative;top: -60px ;color: white">已完成</span>
+                </a>
+                <a class="pay" th:href="@{'/aplipay/hoteled/'+${item.orderNumber}}" th:if="${item.status==0}">
+                    <span style="position:relative;top: -60px ;color: white">去付款</span>
+                </a>
+            </div>
+            <span th:text="${item.yRoom.details}">一床一卫一厨</span>
+        </div>
+
+    </div>
+</body>
+</html>
+<script>
+
+</script>

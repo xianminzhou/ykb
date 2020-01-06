@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.ProjectionMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.Projection" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="projection_id" property="projectionId" jdbcType="INTEGER" />
+    <result column="movie_id" property="movieId" jdbcType="INTEGER" />
+    <result column="projection_date" property="projectionDate" jdbcType="DATE" />
+    <result column="hall_id" property="hallId" jdbcType="INTEGER" />
+    <result column="ticketPrice" property="ticketprice" jdbcType="DOUBLE" />
+    <result column="surplus_seat" property="surplusSeat" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    projection_id, movie_id, projection_date, hall_id, ticketPrice, surplus_seat
+  </sql>
+
+</mapper>

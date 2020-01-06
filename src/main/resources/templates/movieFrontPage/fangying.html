@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>放映页面</title>
+    <link rel="stylesheet" href="../css/reset.css" th:href="@{/maoyan/css/reset.css}" />
+    <link rel="stylesheet" href="../css/nav.css" th:href="@{/maoyan/css/nav.css}" />
+    <link rel="stylesheet" href="../css/xiangqing.css" th:href="@{/maoyan/css/xiangqing.css}" />
+    <style>
+        table{
+            width: 1500px;
+            margin: 100px auto;
+        }
+        tr{
+            height: 80px;
+        }
+        th{
+            font-size: 20px;
+            text-align: center;
+        }
+        td{
+            text-align: center;
+            font-size: 18px;
+        }
+        tr:nth-child(odd){
+            background: #F7F7F7;
+        }
+        .end{
+            position: absolute;
+            left: 129px;bottom:5px;
+            color: #999999;
+            font-size: 16px;
+        }
+        .money{
+            color: #F03D37;
+            font-weight: bolder;
+            font-size: 20px;
+
+        }
+        .buy{
+            width: 100px;
+            height: 35px;
+            margin: auto;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 15px;
+            background: #F03D37;
+            box-shadow: 0 0 0.3em rgba(166,0,0,0.7);
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<!--标题-->
+<header style="background-color:#7760d4;">
+    <div class="header-inner" >
+        <a href="/movie/index"  class="h-logo" th:style="|background: url('/movie-master/images/logoko.png') no-repeat; background-size: cover;|"></a>
+    </div>
+</header>
+<div class="bg-img">
+    <div class="top" style="margin-top: 100px;">
+        <div class="left">
+            <a href=""><img src="../img/0fec3a88133e569ca0067e12f7ad0b80987252.jpg" style="width: 100px;height: 150px;" th:src="@{|/movie-master/images/tupian/${movie.movieImg}|}" alt=""/></a>
+            <div>
+                <h1><a href="" th:text="${movie.movieName}">战狼</a></h1>
+
+                <p >
+                    <span th:each="li,S:${list}" th:text="|${li.cateporyName} |"></span>
+                </p>
+
+                <p th:text="${movie.language}">中国大陆,中国香港,/124分钟</p>
+                <p>2016-09-30大陆上映</p>
+            </div>
+        </div>
+        <!--右边-->
+        <div class="right">
+            <div>
+                <ul>
+                    <li>
+                        <p style="width: 50px">专业评分</p>
+                        <p style="width: 80px" th:unless="${movie.movieScore == null}" th:text="${movie.movieScore}">6.4</p>
+                        <p style="width: 80px" th:if="|${movie.movieScore == null} |" th:text="暂无">6.4</p>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <p style="width: 50px">累计票房</p>
+
+                        <p class="txt-c" style="width: 80px" th:unless="${movie.boxoffice == null}" th:text="|${movie.boxoffice}亿 |">10.33 <span>亿</span></p>
+                        <p class="txt-c" style="width: 80px" th:if="${movie.boxoffice == null}" th:text="暂无">10.33 <span>亿</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容-->
+<section>
+    <!--内容左侧-->
+    <table  cellspacing="0">
+        <tr class="banner" style="height: 65px">
+            <th>放映时间</th>
+            <th>语言版本</th>
+            <th>放映厅</th>
+            <th>售价</th>
+            <th>选座购票</th>
+        </tr>
+        <tr th:each="li,S:${projections}">
+            <td style="position: relative">
+                <h2 th:text="${#dates.format(li.projectionDate,'yyyy-MM-dd HH:mm:ss')}" style="font-size: 16px;" >09:50</h2>
+            </td>
+            <td >
+                <h2 th:if="|${li.language} |" th:text="国语" style="font-size: 16px;">国语2D</h2></td>
+            <td >
+                <h2 th:text="${li.hallName}" style="font-size: 16px;">1号厅</h2></td>
+            <td >
+                <h2 th:text="${li.ticketprice}" class="money" style="margin-top: 22px;"></h2></td>
+            <td><div class="buy" style="margin-top: 22px"><a href="#" th:href="@{|/movie/xuanZuo?id=${li.projectionId}|}">选座购票</a></div></td>
+        </tr>
+    </table>
+</section>
+<!--底部-->
+<footer>
+    <p>&copy2016 猫眼电影 maoyan.com 京ICP证160733号 京ICP备 16022489号-1 京公安网安备 11010502030881号 网络文化经营许可证 电子公告服务规则</p>
+
+    <p>北京猫眼文化传媒有限公司</p>
+</footer>
+</body>
+</html>

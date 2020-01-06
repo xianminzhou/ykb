@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.YuserCardMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.YuserCard" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="card_id" property="cardId" jdbcType="INTEGER" />
+    <result column="card_type" property="cardType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    card_id, card_type
+  </sql>
+</mapper>

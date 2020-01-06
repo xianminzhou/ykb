@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.YRoomTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.YRoomType" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="roomType_id" property="roomtypeId" jdbcType="INTEGER" />
+    <result column="roomType_name" property="roomtypeName" jdbcType="VARCHAR" />
+    <result column="roomType_residue" property="roomtypeResidue" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    roomType_id, roomType_name, roomType_residue
+  </sql>
+</mapper>

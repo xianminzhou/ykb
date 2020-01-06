@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>电影详情</title>
+    <link rel="stylesheet" href="../css/reset.css" th:href="@{/maoyan/css/reset.css}" />
+    <link rel="stylesheet" href="../css/nav.css" th:href="@{/maoyan/css/nav.css}" />
+    <link rel="stylesheet" href="../css/xiangqing.css" th:href="@{/maoyan/css/xiangqing.css}" />
+</head>
+<body>
+<header style="background-color:#7760d4;">
+    <div class="header-inner">
+        <a href="/movie/index"  class="h-logo" th:style="|background: url('/movie-master/images/logoko.png') no-repeat; background-size: cover;|"></a>
+    </div>
+</header>
+<!--导航-->
+<!--标题-->
+<div class="bg-img">
+    <div class="top" style="margin-top: 100px;">
+        <div class="left">
+            <a href=""><img src="../img/0fec3a88133e569ca0067e12f7ad0b80987252.jpg" style="width: 100px;height: 150px;" th:src="@{|/movie-master/images/tupian/${movie.movieImg}|}" alt=""/></a>
+            <div>
+                <h1><a href="" th:text="${movie.movieName}">战狼</a></h1>
+
+                <p >
+                    <span th:each="li,S:${list}" th:text="|${li.cateporyName} |"></span>
+                </p>
+
+                <p th:text="${movie.language}">中国大陆,中国香港,/124分钟</p>
+
+                <p>2016-09-30大陆上映</p>
+            </div>
+        </div>
+        <!--右边-->
+        <div class="right">
+            <div>
+            <ul>
+                <li>
+                    <p style="width: 50px">专业评分</p>
+
+                    <p style="width: 80px" th:unless="${movie.movieScore == null}" th:text="${movie.movieScore}">6.4</p>
+                    <p style="width: 80px" th:if="|${movie.movieScore == null} |" th:text="暂无">6.4</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p style="width: 50px">累计票房</p>
+                    <p class="txt-c" style="width: 80px" th:unless="${movie.boxoffice == null}" th:text="|${movie.boxoffice}亿 |">10.33 <span>亿</span></p>
+                    <p class="txt-c" style="width: 80px" th:if="${movie.boxoffice == null}" th:text="暂无">10.33 <span>亿</span></p>
+                </li>
+            </ul>
+            </div>
+            <a th:href="@{|/movie/fangying?id=${movie.movieId}|}">
+                <button style="width: 100%;margin-top: 20px;padding: 7px 0;background: #df2e2e;border: none;color: white;">立即购票</button>
+            </a>
+        </div>
+    </div>
+</div>
+<!--内容-->
+<section>
+    <!--内容左侧-->
+    <div class="section-left">
+    <ul>
+        <li><a href="">介绍</a></li>
+    </ul>
+    <div>
+        <h2>剧情简介</h2>
+
+        <p class="txt" th:text="${movie.movieOutline}">Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci autem consectetur corporis culpa deleniti dolores mollitia perferendis, perspiciatis sint sunt suscipit ullam, vel voluptatibus. Aperiam laboriosam mollitia optio reiciendis. Labore nihil quo sed. Culpa earum hic ipsa, libero magnam sed? Dignissimos dolores fugit labore modi quas quasi reiciendis ut voluptates.</p>
+    </div>
+        <ul class="txt-1">
+            <li>主演</li>
+        </ul>
+        <ul class="txt-2" >
+            <li th:text="${movie.tostar}">导演</li>
+        </ul>
+        <div class="section-left-3">
+            <ul class="txt-1">
+                <li>热门短评</li>
+                <li class="duanping"><a href="">写短评</a></li>
+            </ul>
+                <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+                <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+
+            <div>
+                <ul>
+                    <li>
+                        <a href=""><img src="../img/610bd1d6daddffca084a9d45f8a24fcc11575.jpg" alt=""/></a>
+                        <img src="../img/v4.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li>yufujin</li>
+                    <li class="txt-3">09-30 <img src="../img/star_icon01.png" alt=""/></li>
+                </ul>
+                <ul>
+                    <li class="txt-4"><a href=""><img src="../img/icon_08.png" alt=""/> 12058</a></li>
+                </ul>
+
+            </div>
+            <p>太好看了，难得的动作片，作品都是经典。为什么这么好看的电影还没有爵迹高，为什么这么好看的电影还l>爵迹高，战狼才是良心超棒的动作片</p>
+        </div>
+
+
+
+
+    </div>
+    <!--内容右侧-->
+    <div class="section-right">
+        <h2>相关电影</h2>
+        <ul>
+            <li th:each="lis,S:${movies}">
+                <img src="../img/02ac72c0e8ee2987f7662ad921a2acc7999433.jpg" th:src="@{|/movie-master/images/tupian/${lis.movieImg}|}" alt=""/>
+
+                <p><a href="" th:href="@{|/movie/xiangqing?id=${lis.movieId}|}" th:text="${lis.movieName}">战狼2</a></p>
+
+                <p><span th:text="${lis.movieScore}">9</span></p>
+            </li>
+        </ul>
+    </div>
+</section>
+<!--底部-->
+<footer>
+    <p>&copy2016 猫眼电影 maoyan.com 京ICP证160733号 京ICP备 16022489号-1 京公安网安备 11010502030881号 网络文化经营许可证 电子公告服务规则</p>
+
+    <p>北京猫眼文化传媒有限公司</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <title>Card - Free Bootstrap 4 Profile Card</title>
+        <meta name="description" content="Love profile card." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/user_css/bootstrap.min.css" th:href="@{/user_css/bootstrap.min.css}">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    </head>
+    <body class="demo-two">
+        <video autoplay loop class="video-background" muted plays-inline>
+            <source src="/static/user_img/mountains.mp4" type="video/mp4" th:src="@{/user_img/mountains.mp4}">
+        </video>
+        <!--hero section-->
+        <section class="hero bg-indigo">
+            <div class="container">
+                <div class="row">
+                    <div class="card border-none col-lg-6 col-md-8 col-sm-10 mx-auto bg-texture">\
+                        <p class="mt-2">
+                            <a href="/" style="color: white; margin: 20px;">首页</a>
+                        </p>
+                        <div class="card-body text-white text-center py-4">
+                            <p class="mt-4 lead text-white">
+                                昵称:<input type="text" name="userName" value="xxx" th:if="${session.yuser != null}" th:value="${session.yuser.userName}">
+                            </p>
+
+                            <p class="mt-4 lead text-white">
+                                手机号:<span style="color: #CFD7F3;line-height: 50px;" th:if="${session.yuser != null}" th:text="${session.yuser.phonenumber}">&nbsp;&nbsp;手机号:123***910</span>
+                            </p>
+
+                            <p class="mt-4 lead text-white" th:if="${session.yuser != null}">
+                                生日:<input type="date" name="birthday" value="yyyy-mm-dd" th:value="${#dates.format(session.yuser.birthday,'yyyy-MM-dd')}">
+                            </p>
+
+                            <p class="mt-4 lead text-white" th:if="${session.yuser != null}">
+                                性别:
+                               <select name="gender">
+                                   <option value="x" th:value="${session.yuser.gender}" th:if="${session.yuser.gender == 1}">男</option>
+                                   <option value="x" th:value="${session.yuser.gender}" th:if="${session.yuser.gender == 0}">女</option>
+                                   <option value="x" th:value="1">男</option>
+                                   <option value="x" th:value="0">女</option>
+                               </select>
+                            </p>
+
+                            <div class="pt-3">
+                                <button class="btn btn-white-alt text-blue btn-lg" onclick="subupdate()">
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                        <script src="/static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+                        <script th:inline="javascript">
+                            function subupdate(){
+                                var phonenumber = [[${session.yuser.phonenumber}]];
+                                var userName = $("input[name='userName']").val();
+                                var birthday = $("input[name='birthday']").val();
+                                var gender = $("select[name='gender']").val();
+
+                                $.ajax({
+                                    url:"/auth/userUpdateByuserId",
+                                    data:{phonenumber:phonenumber,userName:userName,birthday:birthday,gender:gender},
+                                    type:"post",
+                                    success:function (result) {
+                                        if (result == 1){
+                                            alert("修改成功");
+                                            window.location.href="/auth/login";
+                                        } else{
+                                            alert("修改失败");
+                                        }
+                                    }
+                                })
+                            }
+                        </script>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

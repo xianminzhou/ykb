@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script  type="text/javascript"></script>
+<head>
+    <title>账单确认处</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <img src="/hotel_jpg/ykb.png" style="margin-left:270px">
+        </div>
+
+    </div>
+</nav>
+
+<h3>未支付订单</h3>
+
+<style>
+    h3 {
+        text-align: center;
+        color: orange;
+    }
+    tr {
+        text-align: center;
+    }
+
+</style>
+
+
+<table class="table" style="width: 70%;margin: auto">
+    <tr style="background: #2177b8;color:white;font-size: 18px">
+        <td>消费编号</td>
+        <td>消费产品</td>
+        <td>消费价格</td>
+        <td>操作</td>
+    </tr>
+        <tr th:each="p:${pList}" style="background: whitesmoke">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.price }"></td>
+            <td>
+                <a class="btn btn-warning"
+                   th:href="@{'/goConfirm/'+${p.id}}">支付</a>
+            </td>
+        </tr>
+</table>
+<script src="../../js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script src="../../bootstrap/js/bootstrap.js" th:src="@{/bootstrap/js/bootstrap.js}"></script>
+
+<script type="text/javascript">
+
+
+</script>
+
+
+</body>
+</html>

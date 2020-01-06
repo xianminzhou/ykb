@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script  type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
+<html>
+
+<head>
+    <title>支付成功</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+
+</head>
+<style>
+    *{
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+<body>
+<h1 style="color: green;">支付成功</h1>
+<table class="table" style="width: 70%;margin: auto">
+    <tr style="background: #2177b8;color:white;font-size: 18px">
+        <td>
+            订单编号：
+        </td>
+        <td th:text="${out_trade_no }"></td>
+    </tr>
+    <tr style="background: whitesmoke">
+    <td>
+        支付宝交易号：
+    </td>
+    <td th:text="${trade_no }"></td>
+    </tr>
+    <tr style="background: #2177b8;color:white;font-size: 18px">
+    <td>
+        实付金额：
+    </td>
+        <td th:text=" ${total_amount }"></td>
+    </tr>
+    <tr style="background: whitesmoke">
+        <td>
+            购买产品：
+        </td>
+        <td th:text="${productName }"></td>
+    </tr>
+    </tr>
+</table>
+
+
+<a class="btn btn-warning"  href="/auth/index">返回首页</a>
+</body>
+
+</html>

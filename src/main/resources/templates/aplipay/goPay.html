@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script  type="text/javascript"></script>
+
+<html>
+<head>
+    <title>确认页面</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css" th:href="@{/bootstrap/css/bootstrap-theme.css}">
+</head>
+
+<body>
+<nav class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="background: #2177b8;width: 200px; margin-left: 800px;color: white">订单确认支付</a>
+        </div>
+
+    </div>
+</nav>
+<style>
+    *{
+        padding: 0 auto;
+        text-align: center;
+        margin: 0 auto;
+    }
+    td{
+        float: left;
+    }
+    tr{
+        height: 50px;
+    }
+</style>
+<form id="payForm"  method="post" th:action="@{/alipay/goAlipay}">
+    <input type="hidden" name="orderId" th:value="${order.id}"/>
+    <table class="table" style="width: 300px;">
+        <tr style="background: whitesmoke">
+            <td>订单编号：</td>
+            <td th:text="${order.id}"></td></tr>
+        <tr style="background: whitesmoke">
+            <td>
+            产品名称：
+            </td>
+            <td th:text="${p.name}"></td></tr>
+        <tr style="background: whitesmoke">
+        <td>
+            订单价格：
+        </td>
+            <td th:text="${order.orderAmount }"></td></tr>
+        <tr >
+        <td>
+            <input  class="tn btn-info" type="submit" value="前往支付宝进行支付" style="background: #2177b8">
+        </td>
+        </tr>
+    </table>
+</form>
+
+
+<input type="hidden" id="hdnContextPath" name="hdnContextPath" value="http://localhost:9091/"/>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+	<title>La Casa - Real Estate HTML5 Home Page Template</title>
+	<meta charset="utf-8">
+	<meta name="author" content="">
+	<meta name="description" content="La casa free real state fully responsive html5/css3 home page website template"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="/hotel_css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/hotel_css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="/hotel_css/main.css">
+	<!--<link rel="stylesheet" type="text/css" href="/layui.css" media="all">-->
+	<script type="text/javascript" src="/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<!--<script type="text/javascript" src="/laydate.js"></script>
+	<script type="text/javascript" src="/layui.js"></script>-->
+	<script>
+		function go(num) {
+			/*$.ajax({
+				url:"/list2",
+				type :"POST",
+				data : {
+					"pageNum":num,
+				},
+				success : function(result) {
+				}
+			});*/
+			$("#nums").attr("value",num);
+			$("#submitRoom").submit();
+		}
+
+
+		$(document).ready(function(c) {
+			$('.hero').onmouseenter(function(c){
+				$('.caption').fadeOut('slow', function(c){
+				});
+			});
+		})
+
+	</script>
+	<style>
+
+		#findHouse{
+			background:#0F2453 ;
+			height: 160px;
+		}
+		#hotelName{
+			position: relative;
+			top: 30px;
+			font-size: 30px;
+			color: yellow;
+			font-family: 宋体;
+			font-weight: bolder;
+		}
+		#userInfo{
+			position: relative;
+			left: 1200px;
+			top: 10px;
+
+		}
+		.searchMap{
+			width: 290px;
+			height: 70px;
+			float: left;
+			margin-top: 40px;
+			background: white;
+			background: rgba(1,1,1,0.7);
+			box-shadow: 0 0 0.8em rgba(12,324,0,0.8);
+		}
+		.findSel{
+			width: 270px;
+			height: 30px;
+			appearance: none;
+			margin-top: 10px;
+		}
+		.textFind{
+			position: relative;
+			color: white;
+			left: 10px;
+			top: 5px;
+		}
+		.op{
+			color: white;
+		}
+		.inputDate{
+			margin-top: 10px;
+			width: 250px;
+			height: 24px;
+			appearance: none;
+			margin-left: 10px;
+		}
+
+		.sub{
+			width: 200px;
+			height: 70px;
+			background: #c04851;
+			color: white;
+			border: none;
+			float: right;
+			font-size: 25px;
+			font-family: 幼圆;
+			font-weight: bolder;
+			margin-top: 40px;
+			box-shadow: 0 0 0.8em rgba(12,324,0,0.8);
+			border-radius: 5px;
+		}
+		.sub:hover{
+			background: yellow;
+			transition: all linear 0.3s;
+			opacity: 1;
+			color: black;
+		}
+		#think{
+			font-family: 幼圆;text-shadow:5px 1px 6px #F93;
+			width: 1000px;height: 120px;border-radius: 10px;
+			margin: auto;font-weight: bolder;
+		}
+		#residue {
+			position: relative;
+			float: right;
+			bottom: 25px;
+		}
+
+		#houseOrder{
+			position: relative;
+			left: 1090px;
+			top: -6px;
+		}
+		.hero{
+			transition: all linear 0.5s;
+		}
+
+		.hero:hover{
+			/*transition: all linear 0.5s;*/
+			background-image: url("/hotel_jpg/slider1.png");
+			/*以y轴为中心旋转*/
+		}
+
+		/*#pages{
+			width: 500px;
+			height: 50px;
+			border: 1px solid;
+		}*/
+		/*日期样式*/
+		input[type=date]::-webkit-inner-spin-button { visibility: hidden; }
+		a{
+			text-decoration: none;
+		}
+		.goPage{
+			cursor:pointer;
+			color: white;
+		}
+		#pageBack{
+			width: 400px;
+			height: 50px;
+			margin: auto;
+			line-height: 50px;
+			border-radius: 25px;
+			background: #0F2453;
+		}
+		.arr{
+			cursor:not-allowed;
+			color: #ccc;
+		}
+	</style>
+</head>
+<body>
+
+	<section class="hero">
+		<header>
+			<div class="wrapper" >
+				<a id="hotelName" href="/room/list"><span style="color: white">七天优客</span>酒店</a>
+				<nav>
+					<a href="/auth/index" class="login_btn">返回首页</a>
+				</nav>
+			</div>
+			<div id="userInfo"><span style="color: #FFFF25">欢迎：</span><a href="/auth/userIndex" th:text="${user.userName}" >小周</a></div>
+			<div id="houseOrder"><a href="/houseOrder" >我的订单</a></div>
+		</header><!--  end header section  -->
+
+			<section class="caption">
+				<h2 class="caption" id="think">想你所住，住你所想</h2>
+				<br>
+				<h3 class="properties" style="color: #2e317c">Person - Houses - Life</h3>
+			</section>
+	</section><!--  end hero section  -->
+
+
+	<section class="search" id="findHouse">
+		<div class="wrapper" >
+			<form action="/room/list" method="post" id="submitRoom">
+				<input type="hidden" name="pageNum" id="nums">
+				<!--<div id="find">What are you looking for?</div>-->
+				<div class="searchMap" >
+					<span class="textFind">房型</span>
+					<select class="findSel" style="position: relative;  left: 10px" name="yRoomType.roomtypeName">
+						<option class="op" value="">请选择一个房型</option>
+						<option value="客房">客房</option>
+						<option value="行政楼层">行政楼层</option>
+						<option value="套房">套房</option>
+						<option value="棋牌室">棋牌室</option>
+					</select>
+				</div>
+				<div class="searchMap">
+					<span class="textFind" style="position: relative;  left: 20px">价格</span>
+					<input type="text" class="inputDate" th:value="${price}" placeholder="请输入价格" style="position: relative;  left: 10px" name="price">
+				</div>
+				<div class="searchMap" style="width: 290px">
+					<span class="textFind">床型</span>
+					<select class="findSel"style="position: relative;  left: 10px" name="yBedType.bedtypeName">
+						<option class="op" value="">请选择一个床型</option>
+						<option value="特大床">特大床</option>
+						<option value="双床">双床</option>
+					</select>
+				</div>
+				<div id="searchButon">
+					<input type="submit" value="寻找房间" class="sub">
+				</div>
+			</form>
+		</div>
+		</div>
+	</section><!--  end search section  -->
+	<section class="listings">
+		<div class="wrapper">
+			<!--分页搜索-->
+			<form action="#" method="post"></form>
+			<ul class="properties_list">
+				<li th:each="item,S : ${pageInfo.list}">
+					<input type="hidden" th:value="${item.roomId}">
+					<a href="/houseBook" th:href="@{'/houseBook/'+${item.roomId}}">
+					<!--<a href="/houseBook">-->
+						<img src="/hotel_jpg/property_1.jpg" alt="" title="" class="property_img"/>
+					</a>
+					<span class="price" th:text="'￥'+${item.price}">$2500</span>
+					<div class="property_details">
+						<h1>
+							<a href="#" th:text="${item.yRoomType.roomtypeName}">房间类别</a>
+						</h1>
+						<h2>详细信息显示：<span class="property_size" th:text="${item.details}">房间面积为40-45平方米/409-473平方英尺。</span></h2>
+						<!--<h2 id="residue">房型剩余：<span class="residue_number" th:text="${item.yRoomType.roomtypeResidue}">50</span></h2>-->
+					</div>
+				</li>
+			</ul>
+
+			<div class="more_listing" id="pages">
+				<div  id="pageBack">
+					<a class="goPage" th:href="@{|javascript:go(1)|}" >首页</a>
+					<span class="goPage" th:if="${pageInfo.pageNum==1}" style="cursor: not-allowed;;color: #ccc">上页</span>
+					<a class="goPage" th:unless="${pageInfo.pageNum==1}" th:href="@{|javascript:go(${pageInfo.pageNum-1})|}">上页</a>
+					<a class="goPage" style="padding:0 3px"
+					   th:each="n : ${pageInfo.navigatepageNums}"
+					   th:text="${n}"
+					   th:href="@{|javascript:go(${n})|}"
+					   th:utext="${pageInfo.pageNum==n?'<span class=arr>'+n+'</span>':n}"
+					   th:remove="${pageInfo.pageNum==n?'tag':'none'}">
+					</a>
+					<a class="goPage"
+					   th:href="@{|javascript:go(${pageInfo.pageNum+1})|}"
+					   th:utext="${pageInfo.pageNum==pageInfo.pages?'<span class=arr>'+'下页'+'</span>':'下页'}"
+					   th:remove="${pageInfo.pageNum==pageInfo.pages?'tag':'none'}">下页
+					</a>
+					<a class="goPage" th:href="@{|javascript:go(${pageInfo.pages})|}">末页</a>
+				</div>
+
+			</div>
+		</div>
+	</section>	<!--  end listing section  -->
+
+	<footer>
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Appartements</a></li>
+						<li><a href="#">Houses</a></li>
+						<li><a href="#">Villas</a></li>
+						<li><a href="#">Mansions</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">New York</a></li>
+						<li><a href="#">Los Anglos</a></li>
+						<li><a href="#">Miami</a></li>
+						<li><a href="#">Washington</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>La Casa is real estate minimal html5 website template, designed and coded by pixelhint, tellus varius, dictum erat vel, maximus tellus. Sed vitae auctor ipsum</p>
+					<ul>
+						<li><a href="#" class="facebook" target="_blank"></a></li>
+						<li><a href="#" class="twitter" target="_blank"></a></li>
+						<li><a href="#" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2019 La-Casa . All Rights Reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">第一小组</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">第一小组</a>
+		</div>
+	</footer>
+	<!--  end footer  -->
+</body>
+</html>

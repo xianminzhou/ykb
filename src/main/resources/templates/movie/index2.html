@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{
+				margin: 0 auto;
+				padding: 0;
+			}
+			button{
+				display: block;
+				margin: 10px auto;
+			}
+			.box{
+				display: flex;
+				padding:5px;
+			}
+			.item{
+				width: 30px;
+				height: 26px;
+				list-style: none;
+				margin-bottom: 10px;
+				margin-left: 10px;
+				background-color: #fff;
+				background-image: url("/houtai/images/zuowei.png");
+			}
+			#loading{
+				margin-top: 10px;
+				line-height: 30px;
+				text-align: center;
+			}
+			#btn{
+				box-shadow: 0 2px 10px -2px #f03d37;
+				background-color: #f03d37;
+				width: 260px;
+				line-height: 42px;
+				border-radius: 21px;
+				font-size: 16px;
+				color: #fff;
+				cursor: pointer;
+				text-align: center;
+				border-top-color: rgb(255, 255, 255);
+				border-top-style: none;
+				border-top-width: 0px;
+				border-left-color: rgb(255, 255, 255);
+				border-left-style: none;
+				border-left-width: 0px;
+				border-right-color: rgb(255, 255, 255);
+				border-right-style: none;
+				border-right-width: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container" style="width: 450px;"></div>
+		<div><button id="btn">点击购买</button></div>
+<!--		<div id="loading">加载中...</div>-->
+	</body>
+	<script type="text/javascript">
+		// 存放选中的作为
+		var selectorArr = [];
+		
+		// 监听滚动到底部
+		var timer = null;
+		document.onscroll = function () {
+			var scrollHight = document.documentElement.scrollHeight === 0 ? document.body.scrollHeight : document.documentElement.scrollHeight;
+			var scrollTop = document.documentElement.scrollTop === 0 ? document.body.scrollTop : document.documentElement.scrollTop;
+			var container =  document.getElementById('container');
+			if(scrollHight - scrollTop == window.innerHeight){
+				var loading = document.getElementById('loading')
+				timer = setTimeout(function() {
+					renderHtml(5, 10);
+				}, 300);
+			}
+		};
+		
+		// 点击按钮打印
+		var btn = document.getElementById('btn');
+		btn.onclick = function() {
+			console.log(selectorArr);
+			alert(selectorArr)
+		}
+		
+		// 渲染座位的函数
+		function renderHtml(rows, cloumns) {
+			var container = document.getElementById('container')
+			for (var i = 0; i < 9; i++) {
+				var ul = document.createElement('ul');
+				ul.className = 'box'
+				ul.textContent = i+1;
+				for (var j = 0; j < 9; j++) {
+					var li = document.createElement('li');
+					li.className = 'item'
+					li.setAttribute('data-row', i+1);
+					li.setAttribute('data-col', j+1)
+					ul.appendChild(li)
+				}
+				ul.onclick = function (e) {
+					var target = e.target || e.srcElement;
+					if (target.nodeName === 'LI') {
+						if (target.style.backgroundImage == 'url("/houtai/images/xuanzuo.png")') {
+							var coordinate = target.getAttribute('data-row') + '-' + target.getAttribute('data-col');
+							var len = selectorArr.length;
+							target.style.backgroundImage = 'url("/houtai/images/zuowei.png")';
+							target.style.backgroundImage = 'url("/houtai/images/zuowei.png")';
+							
+							for (var i = 0;i < len; i++) {
+								if (coordinate === selectorArr[i]) {
+									selectorArr.splice(i, 1);
+									return
+								}
+							}
+						} else {
+							target.style.backgroundImage = 'url("/houtai/images/xuanzuo.png")';
+							target.style.backgroundImage = 'url("/houtai/images/xuanzuo.png")';
+							selectorArr.push(target.getAttribute('data-row') + '-' + target.getAttribute('data-col'))
+						}
+					}
+				}
+				container.appendChild(ul)
+			}
+			clearTimeout(timer)
+		}
+		renderHtml(30, 10);
+	</script>
+</html>

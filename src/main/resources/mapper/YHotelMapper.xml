@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seecen.dd.xxxsys.dao.mapper.YHotelMapper" >
+  <resultMap id="BaseResultMap" type="com.seecen.dd.xxxsys.dao.domain.YHotel" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="hotel_id" property="hotelId" jdbcType="INTEGER" />
+    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="hotel_intro" property="hotelIntro" jdbcType="VARCHAR" />
+    <result column="hotel_address" property="hotelAddress" jdbcType="VARCHAR" />
+    <result column="hotel_type" property="hotelType" jdbcType="VARCHAR" />
+    <result column="hotel_image" property="hotelImage" jdbcType="VARCHAR" />
+    <result column="hotel_status" property="hotelStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    hotel_id, hotel_name, hotel_intro, hotel_address, hotel_type, hotel_image, hotel_status
+  </sql>
+</mapper>
